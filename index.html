@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Te amo mimei ❤️</title>
+<style>
+    body {
+        background-color: #ffccd5;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        overflow: hidden;
+    }
+    h1 {
+        color: red;
+        font-size: 3em;
+        margin-top: 40px;
+    }
+    .pregunta {
+        margin-top: 50px;
+        font-size: 2em;
+        color: #b30000;
+        background: white;
+        padding: 20px;
+        border-radius: 20px;
+        display: inline-block;
+    }
+    button {
+        font-size: 1.5em;
+        margin: 20px;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        position: relative;
+    }
+    .si { background-color: #ff4d6d; color: white; }
+    .no { background-color: #999; color: white; position: absolute; }
+    /* Corazones animados */
+    .corazon {
+        position: absolute;
+        color: red;
+        font-size: 24px;
+        animation: flotar 6s linear infinite;
+    }
+    @keyframes flotar {
+        0% { transform: translateY(100vh); opacity: 1; }
+        100% { transform: translateY(-10vh); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+    <h1>❤️ Te amo mimei ❤️</h1>
+    <div class="pregunta">
+        ¿Me amas?<br>
+        <button class="si" onclick="location.href='si.html'">Sí</button>
+        <button class="no" id="botonNo" onclick="location.href='no.html'">No</button>
+    </div>
+
+    <script>
+        // Crear corazones animados
+        function crearCorazon() {
+            const corazon = document.createElement("div");
+            corazon.classList.add("corazon");
+            corazon.style.left = Math.random() * window.innerWidth + "px";
+            corazon.style.fontSize = Math.random() * 30 + 15 + "px";
+            corazon.innerHTML = "❤️";
+            document.body.appendChild(corazon);
+            setTimeout(() => { corazon.remove(); }, 6000);
+        }
+        setInterval(crearCorazon, 300);
+
+        // Hacer que el botón No se mueva
+        const botonNo = document.getElementById("botonNo");
+        botonNo.style.top = "0px";
+        botonNo.style.left = "0px";
+
+        botonNo.addEventListener("mouseover", () => {
+            const ancho = window.innerWidth - botonNo.offsetWidth - 50;
+            const alto = window.innerHeight - botonNo.offsetHeight - 50;
+            const nuevaX = Math.random() * ancho;
+            const nuevaY = Math.random() * alto;
+            botonNo.style.left = nuevaX + "px";
+            botonNo.style.top = nuevaY + "px";
+        });
+    </script>
+</body>
+</html>
