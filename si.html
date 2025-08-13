@@ -5,7 +5,7 @@
 <title>Te amo ❤️</title>
 <style>
     body {
-        background-color: #fcf0ca;
+        background-color: #fff9e6; /* Fondo amarillo claro */
         text-align: center;
         font-family: Arial, sans-serif;
     }
@@ -13,10 +13,16 @@
         color: red;
         margin-top: 30px;
     }
+    .contenedor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
     .carrusel {
         position: relative;
         max-width: 500px;
-        margin: auto;
         overflow: hidden;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -42,32 +48,34 @@
     }
     .prev { left: 10px; }
     .next { right: 10px; }
+    .pompompurin {
+        max-width: 200px;
+    }
 </style>
 </head>
 <body>
     <h1>💖 Gracias por amarme 💖</h1>
     <p>Aquí están nuestras fotos:</p>
 
-    <div class="carrusel">
-        <img src="skincare_mi.jpg" class="active" alt="Foto 1">
-        <img src="desp.jpg" alt="Foto 2">
-        <img src="Maquillaje.jpg" alt="Foto 3">
-        <img src="JAJA.jpg" alt="Foto 4">
-        
+    <div class="contenedor">
+        <!-- Carrusel -->
+        <div class="carrusel">
+            <img src="skincare_mi.jpg" class="active" alt="Foto 1">
+            <img src="desp.jpg" alt="Foto 2">
+            <img src="Maquillaje.jpg" alt="Foto 3">
+            <img src="JAJA.jpg" alt="Foto 4">
 
-        <button class="boton prev" onclick="cambiarFoto(-1)">❮</button>
-        <button class="boton next" onclick="cambiarFoto(1)">❯</button>
+            <button class="boton prev" onclick="cambiarFoto(-1)">❮</button>
+            <button class="boton next" onclick="cambiarFoto(1)">❯</button>
+        </div>
+
+        <!-- Imagen de Pompompurin -->
+        <img class="pompompurin" src="https://i.pinimg.com/originals/34/7c/5d/347c5d740381b4a9aef12640add352bc.png" alt="Pompompurin">
     </div>
-    <img class="pompompurin" src="https://i.pinimg.com/originals/34/7c/5d/347c5d740381b4a9aef12640add352bc.png" alt="Pompompurin">
 
     <br>
     <a href="index.html">⬅ Volver</a>
-    <p class="mensaje"> Eres la persona que necesitaba en mi vida, un persona que nunca me
-         arrepentire de conocer. Me has enseñado muchas cosas y quiero que me enseñes muchas mas eres mi primer amor
-        y quiero que seas el ultimo, no dejo de pensar en que sera de nosotros pero lo unico que importa
-    es seguir a tu lado, el amor que te doy esperando que sea suficiente es lo mas sincero que te puedo dar
-la verdad pienso que no te merezco, pero me estoy esforzando en merecerte cada dia. espero que puedas
-esperarme hasta ser suficiente. Te amo 💖</p>
+    <p>Siempre estaré contigo ❤️</p>
 
     <script>
         let indice = 0;
@@ -83,7 +91,7 @@ esperarme hasta ser suficiente. Te amo 💖</p>
             mostrarFoto(indice + n);
         }
 
-        // Carrusel automático cada 3 segundos
+        // Carrusel automático cada 4 segundos
         setInterval(() => {
             cambiarFoto(1);
         }, 4000);
