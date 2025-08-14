@@ -24,28 +24,37 @@
         position: relative;
         width: 90%;
         max-width: 600px;
-        height: 300px;
+        height: 350px;
         margin: 20px auto;
+        perspective: 1200px; /* efecto 3D */
         overflow: hidden;
         border-radius: 15px;
     }
 
     .carrusel {
         display: flex;
-        transition: transform 0.6s ease-in-out;
+        transition: transform 0.8s ease-in-out;
+        transform-style: preserve-3d;
         height: 100%;
     }
 
     .cancion {
         min-width: 100%;
         display: flex;
-        background-color: rgba(255, 255, 255, 0.85);
+        background-color: rgba(255, 255, 255, 0.9);
         border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         overflow: hidden;
         align-items: center;
         gap: 20px;
         padding: 10px;
+        transform: scale(0.9);
+        transition: transform 0.8s ease-in-out, box-shadow 0.8s ease-in-out;
+    }
+
+    .cancion.active {
+        transform: scale(1);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.5);
     }
 
     .cancion img {
@@ -77,18 +86,25 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background-color: rgba(0,0,0,0.5);
+        background-color: #ff7f50;
         color: white;
         border: none;
-        padding: 10px;
+        padding: 15px;
         cursor: pointer;
         border-radius: 50%;
-        font-size: 24px;
+        font-size: 32px;
         z-index: 10;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        transition: transform 0.3s, background-color 0.3s;
     }
 
-    .prev { left: 10px; }
-    .next { right: 10px; }
+    .boton-carrusel:hover {
+        transform: scale(1.2);
+        background-color: #ff4500;
+    }
+
+    .prev { left: -20px; }
+    .next { right: -20px; }
 
     .volver {
         display: inline-block;
@@ -131,7 +147,7 @@
     <div class="carrusel-container">
         <button class="boton-carrusel prev" onclick="cambiar(-1)">❮</button>
         <div class="carrusel" id="carrusel">
-            <a href="https://open.spotify.com/track/1" target="_blank" class="cancion">
+            <a href="https://open.spotify.com/track/1" target="_blank" class="cancion active">
                 <img src="cancion1.jpg" alt="Cancion 1">
                 <div class="cancion-texto">
                     <h3>Canción 1</h3>
@@ -158,23 +174,30 @@
 
     <a href="si.html" class="volver">⬅ Volver</a>
 
-    <!-- Notas musicales flotantes -->
     <div id="notas-container"></div>
 
     <script>
         const carrusel = document.getElementById('carrusel');
-        const total = carrusel.children.length;
+        const canciones = carrusel.children;
         let index = 0;
 
-        function cambiar(dir) {
-            index = (index + dir + total) % total;
+        function actualizarCarrusel() {
+            for (let i = 0; i < canciones.length; i++) {
+                canciones[i].classList.remove('active');
+            }
+            canciones[index].classList.add('active');
             carrusel.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function cambiar(dir) {
+            index = (index + dir + canciones.length) % canciones.length;
+            actualizarCarrusel();
         }
 
         // Cambio automático cada 5 segundos
         setInterval(() => cambiar(1), 5000);
 
-        // Crear notas musicales flotantes
+        // Notas musicales flotantes
         const notasContainer = document.getElementById('notas-container');
         const notas = ['♪', '♫', '♬', '♩'];
 
