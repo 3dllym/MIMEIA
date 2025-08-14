@@ -59,6 +59,46 @@
         text-align: center;
         line-height: 1.5;
     }
+
+    /* Contenedor de los botones */
+    .botones {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .botones a {
+        text-decoration: none;
+        padding: 10px 20px;
+        background-color: #c2185b;
+        color: white;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    .botones a:hover {
+        background-color: #ff4081;
+    }
+
+    /* Nota musical animada */
+    .musica-btn {
+        position: relative;
+    }
+
+    .musica-btn .nota {
+        display: inline-block;
+        margin-left: 5px;
+        animation: subirNota 1s infinite alternate;
+        color: yellow;
+        font-weight: bold;
+    }
+
+    @keyframes subirNota {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0); }
+    }
 </style>
 </head>
 <body>
@@ -87,13 +127,16 @@
             No dejo de pensar en qué será de nosotros, pero lo único que me importa es seguir a tu lado.  
             Y el amor que te doy esperando que sea suficiente, es lo más sincero que te puedo dar.  
             Pienso que no te merezco, pero me esfuerzo cada día para merecerte. Eres mi todo y que nunca se te olvide lo que siento por ti
-            asi como yo jamas dejare de sentirlo. quiero seguir teniendo experiencias contigo quiero seguir riendo, feliz, triste y a hasta llorar pero contigo,
-            que sepas que siempre voy a estar ahi para ti. Te amo 💖
+            así como yo jamás dejaré de sentirlo. Quiero seguir teniendo experiencias contigo quiero seguir riendo, feliz, triste y hasta llorar pero contigo,
+            que sepas que siempre voy a estar ahí para ti. Te amo 💖
         </p>
     </div>
 
-    <br>
-    <a href="index.html">⬅ Volver</a> <a href="canciones.html">🎵 Nuestras Canciones</a>
+    <!-- Botones debajo del carrusel -->
+    <div class="botones">
+        <a href="index.html">⬅ Volver</a>
+        <a href="canciones.html" class="musica-btn">🎵 Nuestras Canciones <span class="nota">♪</span></a>
+    </div>
 
     <script>
         let indice = 0;
@@ -109,7 +152,7 @@
             mostrarFoto(indice + n);
         }
 
-        // Carrusel automático cada 4 segundos
+        // Carrusel automático cada 5 segundos
         setInterval(() => {
             cambiarFoto(1);
         }, 5000);
