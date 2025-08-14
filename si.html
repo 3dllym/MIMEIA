@@ -5,7 +5,7 @@
 <title>Te amo ❤️</title>
 <style>
     body {
-        background-color: #ffe6f0;
+        background-color: #fcf0ca;
         text-align: center;
         font-family: Arial, sans-serif;
     }
@@ -13,10 +13,18 @@
         color: red;
         margin-top: 30px;
     }
+    /* Contenedor del carrusel + mensaje */
+    .contenedor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        margin-top: 20px;
+        flex-wrap: wrap; /* para móviles */
+    }
     .carrusel {
         position: relative;
         max-width: 500px;
-        margin: auto;
         overflow: hidden;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -42,10 +50,14 @@
     }
     .prev { left: 10px; }
     .next { right: 10px; }
+
+    /* Estilo del mensaje */
     .mensaje {
-        margin-top: 10px;
+        font-family: "Times New Roman", serif;
         font-size: 18px;
-        color: #c2185b;
+        max-width: 300px;
+        text-align: center;
+        line-height: 1.5;
     }
 </style>
 </head>
@@ -53,19 +65,33 @@
     <h1>💖 Gracias por amarme 💖</h1>
     <p>Aquí están nuestras fotos:</p>
 
-    <div class="carrusel">
-        <img src="skincare_mi.jpg" class="active" alt="Foto 1">
-        <img src="desp.jpg" alt="Foto 2">
-        <img src="Maquillaje.jpg" alt="Foto 3">
-        <img src="JAJA.jpg" alt="Foto 4">
-        
-        <button class="boton prev" onclick="cambiarFoto(-1)">❮</button>
-        <button class="boton next" onclick="cambiarFoto(1)">❯</button>
+    <div class="contenedor">
+        <!-- Carrusel -->
+        <div class="carrusel">
+            <img src="skincare_mi.jpg" class="active" alt="Foto 1">
+            <img src="desp.jpg" alt="Foto 2">
+            <img src="Maquillaje.jpg" alt="Foto 3">
+            <img src="JAJA.jpg" alt="Foto 4">
+
+            <button class="boton prev" onclick="cambiarFoto(-1)">❮</button>
+            <button class="boton next" onclick="cambiarFoto(1)">❯</button>
+        </div>
+
+        <!-- Mensaje a la derecha -->
+        <p class="mensaje">
+            Eres la persona que necesitaba en mi vida, una persona que nunca me arrepentiré de conocer.  
+            Me has enseñado muchas cosas y quiero que me enseñes muchas más.  
+            Eres mi primer amor y quiero que seas el último.  
+            No dejo de pensar en qué será de nosotros, pero lo único que importa es seguir a tu lado.  
+            El amor que te doy, esperando que sea suficiente, es lo más sincero que puedo dar.  
+            Pienso que no te merezco, pero me esfuerzo cada día en merecerte.  
+            Espero que puedas esperarme hasta ser suficiente.  
+            Te amo 💖
+        </p>
     </div>
 
     <br>
     <a href="index.html">⬅ Volver</a>
-    <p class="mensaje">Eres la mejor parte de mi vida ❤️</p>
 
     <script>
         let indice = 0;
