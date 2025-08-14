@@ -24,9 +24,8 @@
         position: relative;
         width: 90%;
         max-width: 600px;
-        height: 350px;
         margin: 20px auto;
-        perspective: 1200px; /* efecto 3D */
+        perspective: 1200px;
         overflow: hidden;
         border-radius: 15px;
     }
@@ -35,7 +34,6 @@
         display: flex;
         transition: transform 0.8s ease-in-out;
         transform-style: preserve-3d;
-        height: 100%;
     }
 
     .cancion {
@@ -45,7 +43,7 @@
         border-radius: 15px;
         box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         overflow: hidden;
-        align-items: center;
+        align-items: stretch;
         gap: 20px;
         padding: 10px;
         transform: scale(0.9);
@@ -58,16 +56,17 @@
     }
 
     .cancion img {
-        height: 100%;
         width: 50%;
-        object-fit: cover;
+        height: auto;
         border-radius: 15px;
+        object-fit: cover;
     }
 
     .cancion-texto {
+        width: 50%;
+        overflow-y: auto;
         text-align: left;
         padding: 10px;
-        width: 50%;
     }
 
     .cancion-texto h3 {
@@ -82,7 +81,6 @@
         color: #333;
     }
 
-    /* Botones dentro del carrusel */
     .boton-carrusel {
         position: absolute;
         top: 50%;
@@ -123,7 +121,6 @@
         background-color: #0047ab;
     }
 
-    /* Notas musicales flotantes */
     .nota-flotante {
         position: absolute;
         font-size: 24px;
@@ -139,7 +136,6 @@
         50% { opacity: 1; }
         100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
-
 </style>
 </head>
 <body>
@@ -153,24 +149,24 @@
                 <div class="cancion-texto">
                     <h3>MEDIA NARANJA</h3>
                     <p>"Por qué tú eres la mitad que soñé <br>
-                        Cuando tú no estás empiezo a  <br> enloquecer"</p>
+                        Cuando tú no estás empiezo a enloquecer"</p>
                 </div>
             </a>
             <a href="https://www.youtube.com/watch?v=PW6ZSzdjrlo" target="_blank" class="cancion">
                 <img src="sol.jpg" alt="Cancion 2">
                 <div class="cancion-texto">
                     <h3>SOL</h3>
-                    <p>"Es ardiente como el sol, tiene mirada<br> angelical<br>
-                        No te acerques tanto porque <br>te puedes quemar<br>
-                        Tiene un brillo propio,<br> nadie la puede opacar<br>
-                        Aunque no quiera, <br>todo gira en torno a su lugar"</p>
+                    <p>"Es ardiente como el sol, tiene mirada angelical
+                        No te acerques tanto porque te puedes quemar
+                        Tiene un brillo propio, nadie la puede opacar
+                        Aunque no quiera, todo gira en torno a su lugar"</p>
                 </div>
             </a>
             <a href="https://open.spotify.com/track/3" target="_blank" class="cancion">
                 <img src="cancion3.jpg" alt="Cancion 3">
                 <div class="cancion-texto">
                     <h3>Canción 3</h3>
-                    <p>Descripción de la canción 3...</p>
+                    <p>Descripción completa de la canción 3, con más texto que antes para que se vea que el scroll funciona correctamente.</p>
                 </div>
             </a>
         </div>
@@ -199,7 +195,7 @@
             actualizarCarrusel();
         }
 
-        // Cambio automático cada 5 segundos
+        // Cambio automático cada 8 segundos
         setInterval(() => cambiar(1), 8000);
 
         // Notas musicales flotantes
