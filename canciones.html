@@ -13,21 +13,42 @@
         color: red;
         margin-top: 30px;
     }
-    ul {
+    .cancion-lista {
         list-style: none;
         padding: 0;
+        max-width: 700px;
+        margin: auto;
     }
-    li {
+    .cancion {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background-color: #fff3d6;
         margin: 15px 0;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-align: left;
     }
-    a {
-        text-decoration: none;
+    .cancion:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .cancion img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .descripcion {
+        font-size: 16px;
         color: #c2185b;
-        font-size: 20px;
-        transition: color 0.3s;
     }
-    a:hover {
-        color: #ff4081;
+    .titulo {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
     }
     .volver {
         margin-top: 30px;
@@ -40,13 +61,32 @@
 </head>
 <body>
     <h1>🎵 Nuestras Canciones 🎵</h1>
-    <p>Haz clic en una canción para escucharla:</p>
+    <p>Haz clic en la canción para escucharla:</p>
 
-    <ul>
-        <li><a href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank">Canción 1</a></li>
-        <li><a href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank">Canción 2</a></li>
-        <li><a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">Canción 3</a></li>
-        <li><a href="https://www.youtube.com/watch?v=VIDEO_ID_4" target="_blank">Canción 4</a></li>
+    <ul class="cancion-lista">
+        <li class="cancion" onclick="window.open('https://www.youtube.com/watch?v=VIDEO_ID_1', '_blank')">
+            <img src="imagen1.jpg" alt="Canción 1">
+            <div class="descripcion">
+                <div class="titulo">Canción 1</div>
+                <div>Aquí va la descripción de la canción 1 que tú quieras poner.</div>
+            </div>
+        </li>
+
+        <li class="cancion" onclick="window.open('https://www.youtube.com/watch?v=VIDEO_ID_2', '_blank')">
+            <img src="imagen2.jpg" alt="Canción 2">
+            <div class="descripcion">
+                <div class="titulo">Canción 2</div>
+                <div>Aquí va la descripción de la canción 2.</div>
+            </div>
+        </li>
+
+        <li class="cancion" onclick="window.open('https://www.youtube.com/watch?v=VIDEO_ID_3', '_blank')">
+            <img src="imagen3.jpg" alt="Canción 3">
+            <div class="descripcion">
+                <div class="titulo">Canción 3</div>
+                <div>Aquí va la descripción de la canción 3.</div>
+            </div>
+        </li>
     </ul>
 
     <a class="volver" href="si.html">⬅ Volver</a>
