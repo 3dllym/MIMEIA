@@ -28,12 +28,14 @@
         perspective: 1200px;
         overflow: hidden;
         border-radius: 15px;
+        height: 350px; /* altura fija */
     }
 
     .carrusel {
         display: flex;
         transition: transform 0.8s ease-in-out;
         transform-style: preserve-3d;
+        height: 100%;
     }
 
     .cancion {
@@ -57,16 +59,17 @@
 
     .cancion img {
         width: 50%;
-        height: auto;
+        height: 100%;
         border-radius: 15px;
         object-fit: cover;
     }
 
     .cancion-texto {
         width: 50%;
-        overflow-y: auto;
         text-align: left;
         padding: 10px;
+        overflow-y: auto; /* scroll interno */
+        max-height: 100%; /* para que ocupe todo el alto de la tarjeta */
     }
 
     .cancion-texto h3 {
@@ -79,8 +82,10 @@
         margin: 5px 0 0 0;
         font-size: 16px;
         color: #333;
+        word-wrap: break-word;
     }
 
+    /* Botones dentro del carrusel */
     .boton-carrusel {
         position: absolute;
         top: 50%;
@@ -136,6 +141,7 @@
         50% { opacity: 1; }
         100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
+
 </style>
 </head>
 <body>
@@ -156,17 +162,17 @@
                 <img src="sol.jpg" alt="Cancion 2">
                 <div class="cancion-texto">
                     <h3>SOL</h3>
-                    <p>"Es ardiente como el sol, tiene mirada angelical
-                        No te acerques tanto porque te puedes quemar
-                        Tiene un brillo propio, nadie la puede opacar
-                        Aunque no quiera, todo gira en torno a su lugar"</p>
+                    <p>"Es ardiente como el sol, tiene mirada angelical.<br>
+                        No te acerques tanto porque te puedes quemar.<br>
+                        Tiene un brillo propio, nadie la puede opacar.<br>
+                        Aunque no quiera, todo gira en torno a su lugar."</p>
                 </div>
             </a>
             <a href="https://open.spotify.com/track/3" target="_blank" class="cancion">
                 <img src="cancion3.jpg" alt="Cancion 3">
                 <div class="cancion-texto">
                     <h3>Canción 3</h3>
-                    <p>Descripción completa de la canción 3, con más texto que antes para que se vea que el scroll funciona correctamente.</p>
+                    <p>Descripción larga de la canción 3, ahora con scroll interno en la tarjeta para que todo el texto sea visible sin cambiar la altura del carrusel.</p>
                 </div>
             </a>
         </div>
@@ -201,7 +207,6 @@
         // Notas musicales flotantes
         const notasContainer = document.getElementById('notas-container');
         const notas = ['♪', '♫', '♬', '♩'];
-
         for (let i = 0; i < 20; i++) {
             let nota = document.createElement('div');
             nota.classList.add('nota-flotante');
