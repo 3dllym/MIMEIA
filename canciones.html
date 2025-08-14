@@ -20,37 +20,32 @@
         text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
-    /* Contenedor de canciones en columna */
-    .canciones-container {
+    .carrusel-container {
+        position: relative;
+        width: 90%;
+        max-width: 500px;
+        margin: 20px auto;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .carrusel {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        padding: 20px;
-        position: relative;
-        z-index: 1;
+        transition: transform 0.6s ease-in-out;
     }
 
     .cancion {
         background-color: rgba(255, 255, 255, 0.85);
-        width: 80%;
-        max-width: 500px;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        overflow: hidden;
-        text-align: left;
-        transition: transform 0.3s, box-shadow 0.3s;
-        cursor: pointer;
+        width: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 10px;
         padding: 10px;
-    }
-
-    .cancion:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        cursor: pointer;
     }
 
     .cancion img {
@@ -72,12 +67,6 @@
         color: #333;
     }
 
-    a.cancion-link {
-        text-decoration: none;
-        width: 100%;
-    }
-
-    /* Botón volver */
     .volver {
         display: inline-block;
         margin: 20px;
@@ -88,8 +77,6 @@
         font-size: 16px;
         transition: background-color 0.3s;
         text-decoration: none;
-        position: relative;
-        z-index: 1;
     }
 
     .volver:hover {
@@ -118,36 +105,30 @@
 <body>
     <h1>🎵 Nuestras Canciones 🎵</h1>
 
-    <div class="canciones-container">
-        <a href="https://open.spotify.com/track/1" target="_blank" class="cancion-link">
-            <div class="cancion">
+    <div class="carrusel-container">
+        <div class="carrusel" id="carrusel">
+            <a href="https://open.spotify.com/track/1" target="_blank" class="cancion">
                 <img src="cancion1.jpg" alt="Cancion 1">
                 <div class="cancion-texto">
                     <h3>Canción 1</h3>
                     <p>Descripción de la canción 1...</p>
                 </div>
-            </div>
-        </a>
-
-        <a href="https://open.spotify.com/track/2" target="_blank" class="cancion-link">
-            <div class="cancion">
+            </a>
+            <a href="https://open.spotify.com/track/2" target="_blank" class="cancion">
                 <img src="cancion2.jpg" alt="Cancion 2">
                 <div class="cancion-texto">
                     <h3>Canción 2</h3>
                     <p>Descripción de la canción 2...</p>
                 </div>
-            </div>
-        </a>
-
-        <a href="https://open.spotify.com/track/3" target="_blank" class="cancion-link">
-            <div class="cancion">
+            </a>
+            <a href="https://open.spotify.com/track/3" target="_blank" class="cancion">
                 <img src="cancion3.jpg" alt="Cancion 3">
                 <div class="cancion-texto">
                     <h3>Canción 3</h3>
                     <p>Descripción de la canción 3...</p>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
 
     <a href="si.html" class="volver">⬅ Volver</a>
@@ -156,6 +137,18 @@
     <div id="notas-container"></div>
 
     <script>
+        // Carrusel vertical automático
+        const carrusel = document.getElementById('carrusel');
+        const canciones = carrusel.children;
+        let index = 0;
+
+        function mostrarSiguiente() {
+            index = (index + 1) % canciones.length;
+            carrusel.style.transform = `translateY(-${index * 100}%)`;
+        }
+
+        setInterval(mostrarSiguiente, 4000);
+
         // Crear varias notas musicales flotando
         const notasContainer = document.getElementById('notas-container');
         const notas = ['♪', '♫', '♬', '♩'];
