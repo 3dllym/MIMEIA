@@ -2,93 +2,171 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Nuestras Canciones ❤️</title>
+<title>Nuestras Canciones 🎵</title>
 <style>
     body {
-        background-color: #fff9e6;
-        text-align: center;
-        font-family: 'Times New Roman', serif;
-    }
-    h1 {
-        color: red;
-        margin-top: 30px;
-    }
-    .cancion-lista {
-        list-style: none;
+        font-family: "Times New Roman", serif;
+        margin: 0;
         padding: 0;
-        max-width: 700px;
-        margin: auto;
+        text-align: center;
+        background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+        overflow-x: hidden;
     }
-    .cancion {
+
+    h1 {
+        color: #002366;
+        margin-top: 30px;
+        font-size: 36px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    /* Contenedor de canciones */
+    .canciones-container {
         display: flex;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 20px;
-        background-color: #fff3d6;
-        margin: 15px 0;
-        padding: 10px;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cancion {
+        background-color: rgba(255, 255, 255, 0.85);
+        width: 300px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        overflow: hidden;
         text-align: left;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
     }
+
     .cancion:hover {
-        transform: scale(1.02);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     }
+
     .cancion img {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         object-fit: cover;
         border-radius: 10px;
     }
-    .descripcion {
-        font-size: 16px;
-        color: #c2185b;
-    }
-    .titulo {
+
+    .cancion-texto h3 {
+        margin: 0;
         font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 5px;
+        color: #002366;
     }
-    .volver {
-        margin-top: 30px;
-        display: inline-block;
-        font-size: 18px;
-        color: blue;
+
+    .cancion-texto p {
+        margin: 5px 0 0 0;
+        font-size: 14px;
+        color: #333;
+    }
+
+    a.cancion-link {
         text-decoration: none;
     }
+
+    /* Botón volver */
+    .volver {
+        display: inline-block;
+        margin: 20px;
+        padding: 10px 20px;
+        background-color: #002366;
+        color: white;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        text-decoration: none;
+        position: relative;
+        z-index: 1;
+    }
+
+    .volver:hover {
+        background-color: #0047ab;
+    }
+
+    /* Notas musicales flotantes */
+    .nota-flotante {
+        position: absolute;
+        font-size: 24px;
+        color: white;
+        animation: subir 5s linear infinite;
+        opacity: 0.7;
+        z-index: 0;
+        user-select: none;
+    }
+
+    @keyframes subir {
+        0% { transform: translateY(100vh) rotate(0deg); opacity: 0.7; }
+        50% { opacity: 1; }
+        100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
 </style>
 </head>
 <body>
     <h1>🎵 Nuestras Canciones 🎵</h1>
-    <p>Haz clic en la canción para escucharla:</p>
 
-    <ul class="cancion-lista">
-        <li class="cancion" onclick="window.open('https://www.youtube.com/watch?v=VIDEO_ID_1', '_blank')">
-            <img src="imagen1.jpg" alt="Canción 1">
-            <div class="descripcion">
-                <div class="titulo">Canción 1</div>
-                <div>Aquí va la descripción de la canción 1 que tú quieras poner.</div>
+    <div class="canciones-container">
+        <a href="https://open.spotify.com/track/1" target="_blank" class="cancion-link">
+            <div class="cancion">
+                <img src="cancion1.jpg" alt="Cancion 1">
+                <div class="cancion-texto">
+                    <h3>Canción 1</h3>
+                    <p>Descripción de la canción 1...</p>
+                </div>
             </div>
-        </li>
+        </a>
 
-        <li class="cancion" onclick="window.open('https://www.youtube.com/watch?v=VIDEO_ID_2', '_blank')">
-            <img src="imagen2.jpg" alt="Canción 2">
-            <div class="descripcion">
-                <div class="titulo">Canción 2</div>
-                <div>Aquí va la descripción de la canción 2.</div>
+        <a href="https://open.spotify.com/track/2" target="_blank" class="cancion-link">
+            <div class="cancion">
+                <img src="cancion2.jpg" alt="Cancion 2">
+                <div class="cancion-texto">
+                    <h3>Canción 2</h3>
+                    <p>Descripción de la canción 2...</p>
+                </div>
             </div>
-        </li>
+        </a>
 
-        <li class="cancion" onclick="window.open('https://www.youtube.com/watch?v=VIDEO_ID_3', '_blank')">
-            <img src="imagen3.jpg" alt="Canción 3">
-            <div class="descripcion">
-                <div class="titulo">Canción 3</div>
-                <div>Aquí va la descripción de la canción 3.</div>
+        <a href="https://open.spotify.com/track/3" target="_blank" class="cancion-link">
+            <div class="cancion">
+                <img src="cancion3.jpg" alt="Cancion 3">
+                <div class="cancion-texto">
+                    <h3>Canción 3</h3>
+                    <p>Descripción de la canción 3...</p>
+                </div>
             </div>
-        </li>
-    </ul>
+        </a>
+    </div>
 
-    <a class="volver" href="si.html">⬅ Volver</a>
+    <a href="si.html" class="volver">⬅ Volver</a>
+
+    <!-- Notas musicales flotantes -->
+    <div id="notas-container"></div>
+
+    <script>
+        // Crear varias notas musicales flotando
+        const notasContainer = document.getElementById('notas-container');
+        const notas = ['♪', '♫', '♬', '♩'];
+
+        for (let i = 0; i < 20; i++) {
+            let nota = document.createElement('div');
+            nota.classList.add('nota-flotante');
+            nota.textContent = notas[Math.floor(Math.random() * notas.length)];
+            nota.style.left = Math.random() * 100 + 'vw';
+            nota.style.fontSize = (16 + Math.random() * 20) + 'px';
+            nota.style.animationDuration = (4 + Math.random() * 4) + 's';
+            notasContainer.appendChild(nota);
+        }
+    </script>
 </body>
 </html>
