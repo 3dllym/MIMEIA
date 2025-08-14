@@ -20,11 +20,11 @@
         text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
-    /* Contenedor de canciones */
+    /* Contenedor de canciones en columna */
     .canciones-container {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
         gap: 20px;
         padding: 20px;
         position: relative;
@@ -33,7 +33,8 @@
 
     .cancion {
         background-color: rgba(255, 255, 255, 0.85);
-        width: 300px;
+        width: 80%;
+        max-width: 500px;
         border-radius: 15px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         overflow: hidden;
@@ -73,6 +74,7 @@
 
     a.cancion-link {
         text-decoration: none;
+        width: 100%;
     }
 
     /* Botón volver */
@@ -143,15 +145,6 @@
                 <div class="cancion-texto">
                     <h3>Canción 3</h3>
                     <p>Descripción de la canción 3...</p>
-                </div>
-            </div>
-        </a>
-        <a href="https://open.spotify.com/track/3" target="_blank" class="cancion-link">
-            <div class="cancion">
-                <img src="cancion3.jpg" alt="Cancion 4">
-                <div class="cancion-texto">
-                    <h3>Canción 4</h3>
-                    <p>Descripción de la canción 4...</p>
                 </div>
             </div>
         </a>
