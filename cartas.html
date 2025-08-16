@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>💌 Nuestras Cartas 💌</title>
+<title>💌 Nuestro Álbum de Cartas 💌</title>
 <style>
     body {
-        background: linear-gradient(to bottom right, #a8d8ea, #dcedf2);
+        background: linear-gradient(to bottom right, #fceabb, #f8b500);
         font-family: "Times New Roman", serif;
         display: flex;
         justify-content: center;
@@ -15,43 +15,60 @@
         padding: 20px;
     }
 
-    .papel {
+    .album {
         background: #fffdf5;
-        padding: 40px;
-        max-width: 800px;
-        border: 2px solid #d4af37;
-        border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        padding: 30px;
+        max-width: 900px;
+        border: 3px solid #d4af37;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        text-align: center;
         position: relative;
     }
 
-    /* Decoración esquinas */
-    .papel::before, .papel::after {
-        content: "💌";
-        font-size: 28px;
+    .album::before, .album::after {
+        content: "📖";
+        font-size: 32px;
         position: absolute;
         color: #d4af37;
     }
-    .papel::before {
+    .album::before {
         top: 10px;
         left: 15px;
     }
-    .papel::after {
+    .album::after {
         bottom: 10px;
         right: 15px;
     }
 
     h1 {
-        text-align: center;
         color: #c2185b;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
 
-    .contenido {
+    .cartas {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+    }
+
+    .cartas a {
+        display: block;
+        padding: 20px;
+        background: #ffefef;
+        border: 2px solid #c2185b;
+        border-radius: 15px;
+        text-decoration: none;
+        color: #c2185b;
+        font-weight: bold;
         font-size: 18px;
-        line-height: 1.8;
-        color: #333;
-        white-space: pre-line; /* respeta saltos de línea */
+        box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+        transition: transform 0.2s, background 0.3s;
+    }
+
+    .cartas a:hover {
+        transform: scale(1.05);
+        background: #ffc1e3;
     }
 
     .botones {
@@ -74,12 +91,14 @@
 </style>
 </head>
 <body>
-    <div class="papel">
-        <h1>💖 Mi Carta para Ti 💖</h1>
-        <div class="contenido">
-            Aquí puedes escribir tu carta.  
-            Cada palabra será como tinta en un papel especial.  
-            Puedes agregar varios párrafos, emociones y recuerdos.  
+    <div class="album">
+        <h1>💌 Nuestro Álbum de Cartas 💌</h1>
+        <div class="cartas">
+            <a href="carta1.html">📜 Carta 1</a>
+            <a href="carta2.html">📜 Carta 2</a>
+            <a href="carta3.html">📜 Carta 3</a>
+            <a href="carta4.html">📜 Carta 4</a>
+            <a href="carta5.html">📜 Carta 5</a>
         </div>
         <div class="botones">
             <a href="si.html">⬅ Volver</a>
