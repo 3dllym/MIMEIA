@@ -15,6 +15,7 @@
     h1 {
         color: #002366;
         margin: 20px 0;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
     .botones-mes {
@@ -33,6 +34,7 @@
         border-radius: 8px;
         cursor: pointer;
         font-size: 16px;
+        transition: background-color 0.3s;
     }
 
     .botones-mes button:hover {
@@ -42,19 +44,33 @@
     .calendario {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
+        gap: 10px;
         width: 90%;
         max-width: 900px;
         margin: auto;
     }
 
+    .dia-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .dia {
-        background-color: rgba(255,255,255,0.9);
+        background-color: rgba(255,255,255,0.95);
         border: 2px solid #fff;
-        border-radius: 8px;
+        border-radius: 12px;
         position: relative;
         min-height: 120px;
+        width: 100%;
         overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .dia:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     }
 
     .dia strong {
@@ -62,10 +78,11 @@
         top: 5px;
         left: 5px;
         z-index: 2;
-        background: rgba(0,0,0,0.4);
+        background: rgba(0,0,0,0.5);
         color: white;
         padding: 2px 6px;
         border-radius: 4px;
+        font-size: 14px;
     }
 
     .dia img {
@@ -76,7 +93,22 @@
     }
 
     .subir-foto {
-        margin: 10px auto;
+        margin-top: 5px;
+        width: 90%;
+    }
+
+    .subir-foto input[type="file"] {
+        width: 100%;
+        cursor: pointer;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        padding: 4px;
+        background-color: white;
+        transition: background-color 0.2s;
+    }
+
+    .subir-foto input[type="file"]:hover {
+        background-color: #f0f0f0;
     }
 
     .volver {
@@ -88,18 +120,18 @@
         border-radius: 8px;
         font-size: 16px;
         text-decoration: none;
+        transition: background-color 0.3s;
     }
 
-    input[type="file"] {
-        display: block;
-        margin: 0 auto;
-        cursor: pointer;
+    .volver:hover {
+        background-color: #0047ab;
     }
 
 </style>
 </head>
 <body>
     <h1>📅 Calendario de Fotos 💖</h1>
+
     <div class="botones-mes">
         <button onclick="cambiarMes(-1)">⬅ Mes anterior</button>
         <span id="nombre-mes" style="font-weight:bold; font-size:18px; margin:0 10px;"></span>
@@ -120,12 +152,15 @@
             const diasMes = 30;
 
             for(let dia=1; dia<=diasMes; dia++){
+                const diaContainer = document.createElement('div');
+                diaContainer.className = 'dia-container';
+
                 const diaDiv = document.createElement('div');
                 diaDiv.className = 'dia';
                 diaDiv.id = `mes${mesActual}_dia${dia}`;
                 diaDiv.innerHTML = `<strong>${dia}</strong>`;
 
-                // Revisar si hay foto guardada
+                // Foto guardada
                 const fotoURL = localStorage.getItem(`mes${mesActual}_dia${dia}`);
                 if(fotoURL){
                     const img = document.createElement('img');
@@ -133,13 +168,15 @@
                     diaDiv.appendChild(img);
                 }
 
-                calendarioDiv.appendChild(diaDiv);
+                diaContainer.appendChild(diaDiv);
 
-                // Botón de subir foto fuera del cuadro
+                // Botón de subir foto debajo del cuadro
                 const subirDiv = document.createElement('div');
                 subirDiv.className = 'subir-foto';
                 subirDiv.innerHTML = `<input type="file" accept="image/*" onchange="subirFoto(event, ${dia})">`;
-                calendarioDiv.appendChild(subirDiv);
+                diaContainer.appendChild(subirDiv);
+
+                calendarioDiv.appendChild(diaContainer);
             }
 
             document.getElementById('nombre-mes').textContent = meses[mesActual];
@@ -157,6 +194,7 @@
             const formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', 'subidas_diarias');
+
             const res = await fetch('https://api.cloudinary.com/v1_1/dfjoctj0t/image/upload', {
                 method: 'POST',
                 body: formData
@@ -165,8 +203,10 @@
             const data = await res.json();
             const url = data.secure_url;
 
+            // Guardar URL en localStorage
             localStorage.setItem(`mes${mesActual}_dia${dia}`, url);
 
+            // Actualizar la imagen del día
             const diaDiv = document.getElementById(`mes${mesActual}_dia${dia}`);
             const imgExistente = diaDiv.querySelector('img');
             if(imgExistente) imgExistente.remove();
