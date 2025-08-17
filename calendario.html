@@ -1,77 +1,168 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Calendario de Amor ❤️</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; }
-    .calendario {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      max-width: 600px;
-      margin: auto;
+<meta charset="UTF-8">
+<title>Calendario 💖</title>
+<style>
+    body {
+        font-family: "Times New Roman", serif;
+        background: linear-gradient(to bottom, #ffe6f0, #fff1f7);
+        margin: 0;
+        padding: 20px;
+        text-align: center;
     }
-    .dia {
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 10px;
-      position: relative;
+
+    h1 {
+        color: #c2185b;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
-    .dia img {
-      max-width: 100%;
-      margin-top: 5px;
-      border-radius: 8px;
+
+    .calendario-container {
+        display: inline-block;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        margin-top: 20px;
     }
-    .subir {
-      margin-top: 10px;
-      font-size: 12px;
+
+    .mes-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
     }
-  </style>
+
+    .mes-header button {
+        background-color: #c2185b;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .mes-header button:hover {
+        background-color: #ff4081;
+    }
+
+    .mes-header h2 {
+        margin: 0;
+        color: #c2185b;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        width: 14.28%;
+        padding: 10px 0;
+        border: 1px solid #f1c1d1;
+        text-align: center;
+        vertical-align: top;
+    }
+
+    th {
+        background-color: #f8bbd0;
+        color: #fff;
+    }
+
+    td {
+        height: 80px;
+        font-size: 16px;
+    }
+
+    .volver {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #c2185b;
+        color: white;
+        border-radius: 8px;
+        font-size: 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .volver:hover {
+        background-color: #ff4081;
+    }
+</style>
 </head>
 <body>
-  <h1>📅 Nuestro Calendario de Recuerdos 📅</h1>
-  <div class="calendario" id="calendario"></div>
+    <h1>📅 Calendario 💖</h1>
 
-  <script>
-    const calendario = document.getElementById("calendario");
+    <div class="calendario-container">
+        <div class="mes-header">
+            <button onclick="cambiarMes(-1)">❮</button>
+            <h2 id="nombre-mes">Agosto</h2>
+            <button onclick="cambiarMes(1)">❯</button>
+        </div>
 
-    // Crear 30 días como ejemplo
-    for (let i = 1; i <= 30; i++) {
-      const div = document.createElement("div");
-      div.classList.add("dia");
-      div.innerHTML = `
-        <strong>${i}</strong>
-        <form class="form-subir">
-          <input type="file" name="foto" class="subir">
-          <button type="submit">Subir</button>
-        </form>
-        <div class="preview"></div>
-      `;
+        <table id="calendario">
+            <thead>
+                <tr>
+                    <th>Lun</th>
+                    <th>Mar</th>
+                    <th>Mié</th>
+                    <th>Jue</th>
+                    <th>Vie</th>
+                    <th>Sáb</th>
+                    <th>Dom</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Días se llenan con JS -->
+            </tbody>
+        </table>
+    </div>
 
-      // Manejar subida
-      const form = div.querySelector(".form-subir");
-      const preview = div.querySelector(".preview");
+    <a href="si.html" class="volver">⬅ Volver</a>
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const archivo = form.querySelector("input[type=file]").files[0];
-        if (!archivo) return alert("Elige una foto");
+<script>
+    const meses = ["Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    let mesIndex = 0;
 
-        const data = new FormData();
-        data.append("foto", archivo);
+    function generarCalendario(mes) {
+        const tbody = document.querySelector("#calendario tbody");
+        tbody.innerHTML = "";
+        const year = 2025; // puedes ajustarlo
+        const fecha = new Date(year, mes, 1);
+        const primerDia = (fecha.getDay() + 6) % 7; // lunes=0
+        const diasMes = new Date(year, mes + 1, 0).getDate();
 
-        const res = await fetch("http://localhost:3000/upload", {
-          method: "POST",
-          body: data
-        });
+        let fila = document.createElement("tr");
+        // celdas vacías antes del primer día
+        for (let i = 0; i < primerDia; i++) {
+            fila.appendChild(document.createElement("td"));
+        }
 
-        const result = await res.json();
-        preview.innerHTML = `<img src="${result.url}" alt="Foto">`;
-      });
+        for (let dia = 1; dia <= diasMes; dia++) {
+            let td = document.createElement("td");
+            td.textContent = dia;
+            fila.appendChild(td);
+            if ((fila.children.length) % 7 === 0 || dia === diasMes) {
+                tbody.appendChild(fila);
+                fila = document.createElement("tr");
+            }
+        }
 
-      calendario.appendChild(div);
+        document.getElementById("nombre-mes").textContent = meses[mes];
     }
-  </script>
+
+    function cambiarMes(dir) {
+        mesIndex += dir;
+        if (mesIndex < 0) mesIndex = 0;
+        if (mesIndex > meses.length - 1) mesIndex = meses.length - 1;
+        generarCalendario(mesIndex);
+    }
+
+    generarCalendario(mesIndex);
+</script>
 </body>
 </html>
