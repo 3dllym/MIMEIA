@@ -2,113 +2,90 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Calendario 💖</title>
+<title>Calendario Compartido 📅</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
-        text-align: center;
+        font-family: "Times New Roman", serif;
         margin: 0;
         padding: 0;
+        text-align: center;
+        background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
     }
 
     h1 {
         color: #002366;
-        margin: 20px 0;
+        margin-top: 20px;
+        font-size: 36px;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
-    .botones-mes {
-        margin: 20px;
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-
-    .botones-mes button {
-        padding: 10px 20px;
-        border: none;
-        background-color: #28a745;
-        color: white;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-    }
-
-    .botones-mes button:hover {
-        background-color: #1e7e34;
-    }
-
-    .calendario {
+    #calendario {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         gap: 10px;
         width: 90%;
-        max-width: 900px;
-        margin: auto;
-    }
-
-    .dia-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        max-width: 1000px;
+        margin: 20px auto;
     }
 
     .dia {
-        background-color: rgba(255,255,255,0.95);
-        border: 2px solid #fff;
-        border-radius: 12px;
-        position: relative;
-        min-height: 120px;
-        width: 100%;
-        overflow: hidden;
+        background-color: #fff;
+        border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .dia:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    }
-
-    .dia strong {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        z-index: 2;
-        background: rgba(0,0,0,0.5);
-        color: white;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 14px;
+        padding: 5px;
+        height: 150px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-direction: column;
     }
 
     .dia img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        display: block;
+        border-radius: 10px;
     }
 
-    .subir-foto {
-        margin-top: 5px;
-        width: 90%;
+    .fecha {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 5px;
+        font-weight: bold;
+        z-index: 2;
     }
 
-    .subir-foto input[type="file"] {
-        width: 100%;
-        cursor: pointer;
+    #subirFotoContainer {
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    #subirFotoContainer input[type="file"] {
+        padding: 10px;
+    }
+
+    #subirFotoContainer button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
         border-radius: 8px;
-        border: 1px solid #ccc;
-        padding: 4px;
-        background-color: white;
-        transition: background-color 0.2s;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
     }
 
-    .subir-foto input[type="file"]:hover {
-        background-color: #f0f0f0;
+    #subirFotoContainer button:hover {
+        background-color: #1e7e34;
     }
 
     .volver {
@@ -119,104 +96,97 @@
         color: white;
         border-radius: 8px;
         font-size: 16px;
-        text-decoration: none;
         transition: background-color 0.3s;
+        text-decoration: none;
     }
 
     .volver:hover {
         background-color: #0047ab;
     }
-
 </style>
 </head>
 <body>
-    <h1>📅 Calendario de Fotos 💖</h1>
+    <h1>📅 Calendario Compartido</h1>
 
-    <div class="botones-mes">
-        <button onclick="cambiarMes(-1)">⬅ Mes anterior</button>
-        <span id="nombre-mes" style="font-weight:bold; font-size:18px; margin:0 10px;"></span>
-        <button onclick="cambiarMes(1)">Mes siguiente ➡</button>
+    <div id="calendario"></div>
+
+    <div id="subirFotoContainer">
+        <input type="file" id="fotoInput">
+        <button id="subirBtn">Subir Foto</button>
     </div>
-
-    <div class="calendario" id="calendario"></div>
 
     <a href="si.html" class="volver">⬅ Volver</a>
 
     <script>
-        const meses = ["Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        let mesActual = 0;
+        const calendario = document.getElementById("calendario");
+
+        // Mes de ejemplo: agosto 2025 (31 días)
+        const diasMes = 31;
+        const año = 2025;
+        const mes = 8; // Agosto
+
+        // URL pública de JSON con fotos de Cloudinary
+        const fotosJSON = "https://raw.githubusercontent.com/tu_usuario/tu_repo/main/fotos.json"; 
+
+        let fotos = {};
+
+        // Cargar fotos del JSON público
+        fetch(fotosJSON)
+        .then(res => res.json())
+        .then(data => {
+            fotos = data;
+            generarCalendario();
+        })
+        .catch(err => {
+            console.log("Error cargando fotos:", err);
+            generarCalendario();
+        });
 
         function generarCalendario() {
-            const calendarioDiv = document.getElementById('calendario');
-            calendarioDiv.innerHTML = '';
-            const diasMes = 30;
+            calendario.innerHTML = "";
+            for(let i=1; i<=diasMes; i++) {
+                const dia = document.createElement("div");
+                dia.classList.add("dia");
 
-            for(let dia=1; dia<=diasMes; dia++){
-                const diaContainer = document.createElement('div');
-                diaContainer.className = 'dia-container';
+                const fechaDiv = document.createElement("div");
+                fechaDiv.classList.add("fecha");
+                fechaDiv.textContent = i;
+                dia.appendChild(fechaDiv);
 
-                const diaDiv = document.createElement('div');
-                diaDiv.className = 'dia';
-                diaDiv.id = `mes${mesActual}_dia${dia}`;
-                diaDiv.innerHTML = `<strong>${dia}</strong>`;
-
-                // Foto guardada
-                const fotoURL = localStorage.getItem(`mes${mesActual}_dia${dia}`);
-                if(fotoURL){
-                    const img = document.createElement('img');
-                    img.src = fotoURL;
-                    diaDiv.appendChild(img);
+                const dateStr = `${año}-${mes.toString().padStart(2,"0")}-${i.toString().padStart(2,"0")}`;
+                if(fotos[dateStr]) {
+                    const img = document.createElement("img");
+                    img.src = fotos[dateStr];
+                    dia.appendChild(img);
                 }
 
-                diaContainer.appendChild(diaDiv);
-
-                // Botón de subir foto debajo del cuadro
-                const subirDiv = document.createElement('div');
-                subirDiv.className = 'subir-foto';
-                subirDiv.innerHTML = `<input type="file" accept="image/*" onchange="subirFoto(event, ${dia})">`;
-                diaContainer.appendChild(subirDiv);
-
-                calendarioDiv.appendChild(diaContainer);
+                calendario.appendChild(dia);
             }
-
-            document.getElementById('nombre-mes').textContent = meses[mesActual];
         }
 
-        function cambiarMes(dir){
-            mesActual = (mesActual + dir + meses.length) % meses.length;
-            generarCalendario();
-        }
+        // Subir foto a Cloudinary
+        const subirBtn = document.getElementById("subirBtn");
+        const fotoInput = document.getElementById("fotoInput");
 
-        async function subirFoto(event, dia){
-            const file = event.target.files[0];
-            if(!file) return;
+        subirBtn.addEventListener("click", () => {
+            const file = fotoInput.files[0];
+            if(!file) { alert("Selecciona una foto primero."); return; }
 
             const formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', 'subidas_diarias');
+            formData.append("file", file);
+            formData.append("upload_preset", "subidas_diarias"); // tu preset
 
-            const res = await fetch('https://api.cloudinary.com/v1_1/dfjoctj0t/image/upload', {
-                method: 'POST',
+            fetch("https://api.cloudinary.com/v1_1/dfjoctj0t/image/upload", {
+                method: "POST",
                 body: formData
-            });
-
-            const data = await res.json();
-            const url = data.secure_url;
-
-            // Guardar URL en localStorage
-            localStorage.setItem(`mes${mesActual}_dia${dia}`, url);
-
-            // Actualizar la imagen del día
-            const diaDiv = document.getElementById(`mes${mesActual}_dia${dia}`);
-            const imgExistente = diaDiv.querySelector('img');
-            if(imgExistente) imgExistente.remove();
-
-            const img = document.createElement('img');
-            img.src = url;
-            diaDiv.appendChild(img);
-        }
-
-        generarCalendario();
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert("Foto subida! Guarda la URL en el JSON público para que todos la vean.");
+                console.log("URL:", data.secure_url);
+            })
+            .catch(err => console.log("Error:", err));
+        });
     </script>
 </body>
 </html>
