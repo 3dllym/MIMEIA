@@ -2,55 +2,50 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Calendario con Fotos</title>
+<title>Calendario</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>📅 Calendario</h1>
-<div id="mes-container"></div>
-<a href="si.html">⬅ Volver</a>
+    <h1>📅 Calendario</h1>
+    <a href="index.html" class="boton">⬅ Volver</a>
 
-<script>
-const mesNombres = ["Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-const diasPorMes = [31,30,31,30,31]; // de agosto a diciembre
+    <div class="meses">
+        <button onclick="mostrarMes('agosto')">Agosto</button>
+        <button onclick="mostrarMes('septiembre')">Septiembre</button>
+        <button onclick="mostrarMes('octubre')">Octubre</button>
+        <button onclick="mostrarMes('noviembre')">Noviembre</button>
+        <button onclick="mostrarMes('diciembre')">Diciembre</button>
+    </div>
 
-const container = document.getElementById('mes-container');
+    <div id="calendario"></div>
 
-for(let m=0;m<mesNombres.length;m++){
-    const mesDiv = document.createElement('div');
-    mesDiv.className = 'mes';
-    mesDiv.innerHTML = `<h2>${mesNombres[m]}</h2>`;
-    for(let d=1;d<=diasPorMes[m];d++){
-        const td = document.createElement('div');
-        td.className = 'dia';
-        td.textContent = d;
+    <script>
+        const diasPorMes = {
+            agosto: 31,
+            septiembre: 30,
+            octubre: 31,
+            noviembre: 30,
+            diciembre: 31
+        };
 
-        // Click para subir foto
-        td.onclick = function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = function(e) {
-                const file = e.target.files[0];
-                const formData = new FormData();
-                formData.append('foto', file);
-
-                fetch('/upload', { method:'POST', body: formData })
-                .then(res => res.json())
-                .then(data => {
-                    const img = document.createElement('img');
-                    img.src = 'uploads/' + data.filename;
-                    td.innerHTML = d;
-                    td.appendChild(img);
-                });
+        function mostrarMes(mes) {
+            const cont = document.getElementById('calendario');
+            cont.innerHTML = `<h2>${mes.toUpperCase()}</h2>`;
+            for (let i = 1; i <= diasPorMes[mes]; i++) {
+                cont.innerHTML += `
+                    <div class="dia">
+                        <strong>Día ${i}</strong><br>
+                        <form action="/subir" method="post" enctype="multipart/form-data">
+                            <input type="file" name="foto" required>
+                            <input type="submit" value="Subir foto">
+                        </form>
+                    </div>
+                `;
             }
-            input.click();
         }
 
-        mesDiv.appendChild(td);
-    }
-    container.appendChild(mesDiv);
-}
-</script>
+        // Mostrar agosto por defecto
+        mostrarMes('agosto');
+    </script>
 </body>
 </html>
