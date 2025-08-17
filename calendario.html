@@ -28,6 +28,14 @@
             diciembre: 31
         };
 
+        let fotos = [];
+
+        // Cargar fotos existentes
+        async function cargarFotos() {
+            const res = await fetch('/fotos');
+            fotos = await res.json();
+        }
+
         function mostrarMes(mes) {
             const cont = document.getElementById('calendario');
             cont.innerHTML = `<h2>${mes.toUpperCase()}</h2>`;
@@ -39,13 +47,29 @@
                             <input type="file" name="foto" required>
                             <input type="submit" value="Subir foto">
                         </form>
+                        <div class="fotos-dia" id="${mes}-${i}"></div>
                     </div>
                 `;
             }
+            mostrarFotos();
+        }
+
+        function mostrarFotos() {
+            fotos.forEach(f => {
+                // Intentamos obtener mes y día del nombre de archivo si tiene formato mes-dia
+                const div = document.getElementById(f.mesDia);
+                if (div) {
+                    const img = document.createElement('img');
+                    img.src = '/uploads/' + f;
+                    img.style.width = '100%';
+                    img.style.marginTop = '5px';
+                    div.appendChild(img);
+                }
+            });
         }
 
         // Mostrar agosto por defecto
-        mostrarMes('agosto');
+        cargarFotos().then(() => mostrarMes('agosto'));
     </script>
 </body>
 </html>

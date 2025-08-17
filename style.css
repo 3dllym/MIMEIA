@@ -43,6 +43,10 @@ h1 {
     border: 2px solid #c2185b;
     padding: 10px;
     border-radius: 10px;
-    width: 150px;
+    width: 180px;
     background-color: #fff;
+}
+
+.dia img {
+    border-radius: 5px;
 }
