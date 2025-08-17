@@ -33,7 +33,7 @@
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         padding: 5px;
-        height: 150px;
+        height: 180px;
         position: relative;
         display: flex;
         align-items: center;
@@ -125,8 +125,8 @@
         const año = 2025;
         const mes = 8; // Agosto
 
-        // URL pública de JSON con fotos de Cloudinary
-        const fotosJSON = "https://raw.githubusercontent.com/tu_usuario/tu_repo/main/fotos.json"; 
+        // URL pública de JSON con fotos de GitHub
+        const fotosJSON = "https://raw.githubusercontent.com/3dllym/MIMEIA/main/fotos.json"; 
 
         let fotos = {};
 
@@ -182,7 +182,7 @@
             })
             .then(res => res.json())
             .then(data => {
-                alert("Foto subida! Guarda la URL en el JSON público para que todos la vean.");
+                alert("Foto subida! Copia la URL y agrégala al JSON público para que todos la vean.");
                 console.log("URL:", data.secure_url);
             })
             .catch(err => console.log("Error:", err));
