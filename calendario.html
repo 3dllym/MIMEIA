@@ -32,8 +32,8 @@
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        padding: 5px;
-        height: 180px;
+        padding: 0;
+        height: 150px;
         position: relative;
         display: flex;
         align-items: center;
@@ -46,7 +46,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 10px;
     }
 
     .fecha {
@@ -125,23 +124,9 @@
         const año = 2025;
         const mes = 8; // Agosto
 
-        // URL pública de JSON con fotos de GitHub
-        const fotosJSON = "https://raw.githubusercontent.com/3dllym/MIMEIA/main/fotos.json"; 
+        let fotos = {}; // Guardaremos URLs de fotos subidas
 
-        let fotos = {};
-
-        // Cargar fotos del JSON público
-        fetch(fotosJSON)
-        .then(res => res.json())
-        .then(data => {
-            fotos = data;
-            generarCalendario();
-        })
-        .catch(err => {
-            console.log("Error cargando fotos:", err);
-            generarCalendario();
-        });
-
+        // Generar calendario
         function generarCalendario() {
             calendario.innerHTML = "";
             for(let i=1; i<=diasMes; i++) {
@@ -164,7 +149,9 @@
             }
         }
 
-        // Subir foto a Cloudinary
+        generarCalendario();
+
+        // Subir foto
         const subirBtn = document.getElementById("subirBtn");
         const fotoInput = document.getElementById("fotoInput");
 
@@ -172,18 +159,26 @@
             const file = fotoInput.files[0];
             if(!file) { alert("Selecciona una foto primero."); return; }
 
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", "subidas_diarias"); // tu preset
+            const diaSeleccionado = prompt(`¿A qué día quieres subir la foto? (1-${diasMes})`);
+            const dia = parseInt(diaSeleccionado);
+            if(isNaN(dia) || dia < 1 || dia > diasMes) {
+                alert("Día inválido.");
+                return;
+            }
 
-            fetch("https://api.cloudinary.com/v1_1/dfjoctj0t/image/upload", {
+            const formData = new FormData();
+            formData.append("foto", file);
+
+            fetch("/upload", {
                 method: "POST",
                 body: formData
             })
             .then(res => res.json())
             .then(data => {
-                alert("Foto subida! Copia la URL y agrégala al JSON público para que todos la vean.");
-                console.log("URL:", data.secure_url);
+                alert("Foto subida correctamente!");
+                const dateStr = `${año}-${mes.toString().padStart(2,"0")}-${dia.toString().padStart(2,"0")}`;
+                fotos[dateStr] = data.url;
+                generarCalendario();
             })
             .catch(err => console.log("Error:", err));
         });
