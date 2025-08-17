@@ -2,167 +2,55 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Calendario 💖</title>
-<style>
-    body {
-        font-family: "Times New Roman", serif;
-        background: linear-gradient(to bottom, #ffe6f0, #fff1f7);
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-    }
-
-    h1 {
-        color: #c2185b;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    }
-
-    .calendario-container {
-        display: inline-block;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        margin-top: 20px;
-    }
-
-    .mes-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .mes-header button {
-        background-color: #c2185b;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-    }
-
-    .mes-header button:hover {
-        background-color: #ff4081;
-    }
-
-    .mes-header h2 {
-        margin: 0;
-        color: #c2185b;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
-
-    th, td {
-        width: 14.28%;
-        padding: 10px 0;
-        border: 1px solid #f1c1d1;
-        text-align: center;
-        vertical-align: top;
-    }
-
-    th {
-        background-color: #f8bbd0;
-        color: #fff;
-    }
-
-    td {
-        height: 80px;
-        font-size: 16px;
-    }
-
-    .volver {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #c2185b;
-        color: white;
-        border-radius: 8px;
-        font-size: 16px;
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
-
-    .volver:hover {
-        background-color: #ff4081;
-    }
-</style>
+<title>Calendario con Fotos</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>📅 Calendario 💖</h1>
-
-    <div class="calendario-container">
-        <div class="mes-header">
-            <button onclick="cambiarMes(-1)">❮</button>
-            <h2 id="nombre-mes">Agosto</h2>
-            <button onclick="cambiarMes(1)">❯</button>
-        </div>
-
-        <table id="calendario">
-            <thead>
-                <tr>
-                    <th>Lun</th>
-                    <th>Mar</th>
-                    <th>Mié</th>
-                    <th>Jue</th>
-                    <th>Vie</th>
-                    <th>Sáb</th>
-                    <th>Dom</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Días se llenan con JS -->
-            </tbody>
-        </table>
-    </div>
-
-    <a href="si.html" class="volver">⬅ Volver</a>
+<h1>📅 Calendario</h1>
+<div id="mes-container"></div>
+<a href="si.html">⬅ Volver</a>
 
 <script>
-    const meses = ["Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    let mesIndex = 0;
+const mesNombres = ["Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+const diasPorMes = [31,30,31,30,31]; // de agosto a diciembre
 
-    function generarCalendario(mes) {
-        const tbody = document.querySelector("#calendario tbody");
-        tbody.innerHTML = "";
-        const year = 2025; // puedes ajustarlo
-        const fecha = new Date(year, mes, 1);
-        const primerDia = (fecha.getDay() + 6) % 7; // lunes=0
-        const diasMes = new Date(year, mes + 1, 0).getDate();
+const container = document.getElementById('mes-container');
 
-        let fila = document.createElement("tr");
-        // celdas vacías antes del primer día
-        for (let i = 0; i < primerDia; i++) {
-            fila.appendChild(document.createElement("td"));
-        }
+for(let m=0;m<mesNombres.length;m++){
+    const mesDiv = document.createElement('div');
+    mesDiv.className = 'mes';
+    mesDiv.innerHTML = `<h2>${mesNombres[m]}</h2>`;
+    for(let d=1;d<=diasPorMes[m];d++){
+        const td = document.createElement('div');
+        td.className = 'dia';
+        td.textContent = d;
 
-        for (let dia = 1; dia <= diasMes; dia++) {
-            let td = document.createElement("td");
-            td.textContent = dia;
-            fila.appendChild(td);
-            if ((fila.children.length) % 7 === 0 || dia === diasMes) {
-                tbody.appendChild(fila);
-                fila = document.createElement("tr");
+        // Click para subir foto
+        td.onclick = function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                const formData = new FormData();
+                formData.append('foto', file);
+
+                fetch('/upload', { method:'POST', body: formData })
+                .then(res => res.json())
+                .then(data => {
+                    const img = document.createElement('img');
+                    img.src = 'uploads/' + data.filename;
+                    td.innerHTML = d;
+                    td.appendChild(img);
+                });
             }
+            input.click();
         }
 
-        document.getElementById("nombre-mes").textContent = meses[mes];
+        mesDiv.appendChild(td);
     }
-
-    function cambiarMes(dir) {
-        mesIndex += dir;
-        if (mesIndex < 0) mesIndex = 0;
-        if (mesIndex > meses.length - 1) mesIndex = meses.length - 1;
-        generarCalendario(mesIndex);
-    }
-
-    generarCalendario(mesIndex);
+    container.appendChild(mesDiv);
+}
 </script>
 </body>
 </html>
