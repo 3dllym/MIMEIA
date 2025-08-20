@@ -1,143 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Nuestras Canciones 🎵</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canciones Especiales</title>
+  <style>
     body {
-        font-family: "Times New Roman", serif;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-        background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+      font-family: Arial, sans-serif;
+      background: #fdfdfd;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
 
     h1 {
-        color: #002366;
-        margin-bottom: 20px;
-        font-size: 36px;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      margin: 20px 0;
+      color: #444;
     }
 
-    /* Nueva grilla */
-    .galeria {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
+    .canciones-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
     }
 
     .cancion {
-        display: flex;
-        flex-direction: row;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 15px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-        overflow: hidden;
-        gap: 15px;
-        padding: 10px;
-        text-decoration: none;
-        color: inherit;
-        transition: transform 0.3s, box-shadow 0.3s;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease;
     }
 
     .cancion:hover {
-        transform: scale(1.03);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+      transform: scale(1.02);
     }
 
     .cancion img {
-        width: 40%;
-        border-radius: 12px;
-        object-fit: cover;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
     }
 
     .cancion-texto {
-        width: 60%;
-        text-align: left;
-        padding: 5px;
-        overflow-y: auto;
+      padding: 15px;
     }
 
     .cancion-texto h3 {
-        margin: 0;
-        font-size: 20px;
-        color: #002366;
+      margin: 10px 0;
+      color: #222;
     }
 
     .cancion-texto p {
-        margin: 5px 0 0 0;
-        font-size: 15px;
-        color: #333;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-line;
     }
-
-    .volver {
-        display: inline-block;
-        margin: 30px;
-        padding: 10px 20px;
-        background-color: #002366;
-        color: white;
-        border-radius: 8px;
-        font-size: 16px;
-        transition: background-color 0.3s;
-        text-decoration: none;
-    }
-
-    .volver:hover {
-        background-color: #0047ab;
-    }
-</style>
+  </style>
 </head>
 <body>
-    <h1>🎵 Nuestras Canciones 🎵</h1>
+  <h1>🎶 Canciones Especiales 🎶</h1>
 
-    <div class="galeria">
-        <a href="https://www.youtube.com/watch?v=GnOeMnXjMJY" target="_blank" class="cancion">
-            <img src="medianaranja.jpg" alt="Cancion 1">
-            <div class="cancion-texto">
-                <h3>MEDIA NARANJA</h3>
-                <p>"Por qué tú eres la mitad que soñé <br>
-                Cuando tú no estás empiezo a enloquecer"</p>
-            </div>
-        </a>
+  <div class="canciones-container">
 
-        <a href="https://www.youtube.com/watch?v=PW6ZSzdjrlo" target="_blank" class="cancion">
-            <img src="sol.jpg" alt="Cancion 2">
-            <div class="cancion-texto">
-                <h3>SOL</h3>
-                <p>"Es ardiente como el sol,<br> tiene mirada angelical..."</p>
-            </div>
-        </a>
+    <a href="https://www.youtube.com/watch?v=PW6ZSzdjrlo" target="_blank" class="cancion">
+      <img src="medianaranja.jpg" alt="Cancion 1">
+      <div class="cancion-texto">
+        <h3>MEDIA NARANJA</h3>
+        <p>"Por qué tú eres la mitad que soñé <br>
+        Cuando tú no estás empiezo a enloquecer"</p>
+      </div>
+    </a>
 
-        <a href="https://www.youtube.com/watch?v=3hiYJIyDoBI" target="_blank" class="cancion">
-            <img src="viernes 13.jpg" alt="Cancion 3">
-            <div class="cancion-texto">
-                <h3>Viernes 13</h3>
-                <p>"Tú tienes todo lo que busco<br>Conocerte, para mí, <br>es todo un gusto..."</p>
-            </div>
-        </a>
+    <a href="https://www.youtube.com/watch?v=PW6ZSzdjrlo" target="_blank" class="cancion">
+      <img src="sol.jpg" alt="Cancion 2">
+      <div class="cancion-texto">
+        <h3>SOL</h3>
+        <p>"Es ardiente como el sol,<br>
+        tiene mirada angelical.<br>
+        No te acerques tanto<br>
+        porque te puedes quemar.<br>
+        Tiene un brillo propio, <br>
+        nadie la puede opacar.<br>
+        Aunque no quiera, <br>
+        todo gira en torno a su lugar."</p>
+      </div>
+    </a>
 
-        <a href="https://www.youtube.com/watch?v=NmvVhovjJI0" target="_blank" class="cancion">
-            <img src="SEE YOU AGAIN.jpg" alt="Cancion 4">
-            <div class="cancion-texto">
-                <h3>SEE YOU AGAIN</h3>
-                <p>"You live in my dream state <br>Relocate my fantasy..."
-                "You exist behind my eyelids,<br> my eyelids Now I don't wanna wake up" <br><br> 
-                "Cupid hit me, cupid hit me with <br>precision, I-Wonder if you<br> 
-                look both ways When <br> you cross my mind"</p>
-            </div>
-        </a>
+    <a href="https://www.youtube.com/watch?v=3hiYJIyDoBI" target="_blank" class="cancion">
+      <img src="viernes 13.jpg" alt="Cancion 3">
+      <div class="cancion-texto">
+        <h3>Viernes 13</h3>
+        <p>"Tú tienes todo lo que busco<br>
+        Conocerte, para mí, <br>
+        es todo un gusto<br>
+        Tienes algo en particular, <br>
+        algo que te hace más<br>
+        Algo que no entiendo,<br>
+        que no me para de enamorar"</p>
+      </div>
+    </a>
 
-        <a href="https://youtube.com" target="_blank" class="cancion">
-            <img src="interrogacion.jpg" alt="Cancion 5">
-            <div class="cancion-texto">
-                <h3>?????</h3>
-                <p>??????????????<br>???????????????</p>
-            </div>
-        </a>
-    </div>
+    <a href="https://www.youtube.com/watch?v=NmvVhovjJI0" target="_blank" class="cancion">
+      <img src="SEE YOU AGAIN.jpg" alt="Cancion 4">
+      <div class="cancion-texto">
+        <h3>SEE YOU AGAIN</h3>
+        <p>"You live in my dream state <br>
+        Relocate my fantasy"<br><br>
+        "You exist behind my eyelids,<br>
+        my eyelids Now I don't wanna wake up"<br><br>
+        "Cupid hit me, cupid hit me with <br>
+        precision, I-Wonder if you<br>
+        look both ways When <br>
+        you cross my mind"</p>
+      </div>
+    </a>
 
-    <a href="si.html" class="volver">⬅ Volver</a>
+    <a href="https://youtube.com" target="_blank" class="cancion">
+      <img src="interrogacion.jpg" alt="Cancion 5">
+      <div class="cancion-texto">
+        <h3>?????</h3>
+        <p>??????????????<br>
+        ???????????????</p>
+      </div>
+    </a>
+
+  </div>
 </body>
 </html>
