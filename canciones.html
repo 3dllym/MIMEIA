@@ -1,149 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Nuestras Canciones 🎵</title>
-<style>
+  <meta charset="UTF-8">
+  <title>Nuestras Canciones 🎵</title>
+  <style>
     body {
-        font-family: "Times New Roman", serif;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-        background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+      font-family: "Times New Roman", serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
     }
-
     h1 {
-        color: #002366;
-        margin-bottom: 20px;
-        font-size: 36px;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      color: #002366;
+      margin-bottom: 20px;
+      font-size: 36px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
-
     /* Nueva grilla */
     .galeria {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
     .cancion {
-        display: flex;
-        flex-direction: row;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 15px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-        overflow: hidden;
-        gap: 15px;
-        padding: 10px;
-        text-decoration: none;
-        color: inherit;
-        transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: row;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      overflow: hidden;
+      gap: 15px;
+      padding: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-
     .cancion:hover {
-        transform: scale(1.03);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+      transform: scale(1.03);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
     }
-
     .cancion img {
-        width: 40%;
-        border-radius: 12px;
-        object-fit: cover;
+      width: 40%;
+      border-radius: 12px;
+      object-fit: cover;
     }
-
     .cancion-texto {
-        width: 60%;
-        text-align: left;
-        padding: 5px;
-        overflow-y: auto;
+      width: 60%;
+      text-align: left;
+      padding: 5px;
+      overflow-y: auto;
     }
-
     .cancion-texto h3 {
-        margin: 0;
-        font-size: 20px;
-        color: #002366;
+      margin: 0;
+      font-size: 20px;
+      color: #002366;
     }
-
     .cancion-texto p {
-        margin: 5px 0 0 0;
-        font-size: 15px;
-        color: #333;
+      margin: 5px 0 0 0;
+      font-size: 15px;
+      color: #333;
     }
-
+    .contador {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #d9534f;
+    }
     .volver {
-        display: inline-block;
-        margin: 30px;
-        padding: 10px 20px;
-        background-color: #002366;
-        color: white;
-        border-radius: 8px;
-        font-size: 16px;
-        transition: background-color 0.3s;
-        text-decoration: none;
+      display: inline-block;
+      margin: 30px;
+      padding: 10px 20px;
+      background-color: #002366;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      text-decoration: none;
     }
-
     .volver:hover {
-        background-color: #0047ab;
+      background-color: #0047ab;
     }
-</style>
+  </style>
 </head>
 <body>
-    <h1>🎵 Nuestras Canciones 🎵</h1>
+  <h1>🎵 Nuestras Canciones 🎵</h1>
 
-    <div class="galeria">
-        <a href="https://www.youtube.com/watch?v=GnOeMnXjMJY" target="_blank" class="cancion">
-            <img src="medianaranja.jpg" alt="Cancion 1">
-            <div class="cancion-texto">
-                <h3>MEDIA NARANJA</h3>
-                <p>"Por qué tú eres la mitad que soñé <br>
-                Cuando tú no estás empiezo a enloquecer"</p>
-            </div>
-        </a>
+  <div class="galeria">
+    <a href="https://www.youtube.com/watch?v=GnOeMnXjMJY" target="_blank" class="cancion">
+      <img src="medianaranja.jpg" alt="Cancion 1">
+      <div class="cancion-texto">
+        <h3>MEDIA NARANJA</h3>
+        <p>"Por qué tú eres la mitad que soñé <br> Cuando tú no estás empiezo a enloquecer"</p>
+      </div>
+    </a>
 
-        <a href="https://www.youtube.com/watch?v=PW6ZSzdjrlo" target="_blank" class="cancion">
-            <img src="sol.jpg" alt="Cancion 2">
-            <div class="cancion-texto">
-                <h3>SOL</h3>
-                <p>"Es ardiente como el sol,<br> tiene mirada angelical..."</p>
-            </div>
-        </a>
+    <a href="https://www.youtube.com/watch?v=PW6ZSzdjrlo" target="_blank" class="cancion">
+      <img src="sol.jpg" alt="Cancion 2">
+      <div class="cancion-texto">
+        <h3>SOL</h3>
+        <p>"Es ardiente como el sol,<br> tiene mirada angelical..."</p>
+      </div>
+    </a>
 
-        <a href="https://www.youtube.com/watch?v=3hiYJIyDoBI" target="_blank" class="cancion">
-            <img src="viernes 13.jpg" alt="Cancion 3">
-            <div class="cancion-texto">
-                <h3>Viernes 13</h3>
-                <p>"Tú tienes todo lo que busco<br>Conocerte, para mí, <br>es todo un gusto..."</p>
-            </div>
-        </a>
+    <a href="https://www.youtube.com/watch?v=3hiYJIyDoBI" target="_blank" class="cancion">
+      <img src="viernes 13.jpg" alt="Cancion 3">
+      <div class="cancion-texto">
+        <h3>Viernes 13</h3>
+        <p>"Tú tienes todo lo que busco<br>Conocerte, para mí, <br>es todo un gusto..."</p>
+      </div>
+    </a>
 
-        <a href="https://www.youtube.com/watch?v=NmvVhovjJI0" target="_blank" class="cancion">
-            <img src="SEE YOU AGAIN.jpg" alt="Cancion 4">
-            <div class="cancion-texto">
-                <h3>SEE YOU AGAIN</h3>
-                <p>"You live in my dream state <br>Relocate my fantasy..." <br>
-                "Cupid hit me, cupid hit me with <br>precision, I-Wonder if you<br> look both ways When <br> you cross my mind"</p>
-            </div>
-        </a>
+    <a href="https://www.youtube.com/watch?v=NmvVhovjJI0" target="_blank" class="cancion">
+      <img src="SEE YOU AGAIN.jpg" alt="Cancion 4">
+      <div class="cancion-texto">
+        <h3>SEE YOU AGAIN</h3>
+        <p>"You live in my dream state <br>Relocate my fantasy..." <br><br> "Cupid hit me, cupid hit me with <br>precision, I-Wonder if you<br> look both ways When <br> you cross my mind"</p>
+      </div>
+    </a>
 
-        <a href="https://www.youtube.com/watch?v=16R5bvunbow" target="_blank" class="cancion">
-            <img src="COMPARTIR.jpg" alt="Cancion 5">
-            <div class="cancion-texto">
-                <h3>Compartir</h3>
-                <p>Amor mio esta cancion te la dedico completa <br>
-                 siento cada parte de la cancion quiero todo contigo, Te amo.</p>
-            </div>
-        </a>
-        <a href="https://youtube.com" target="_blank" class="cancion">
-            <img src="interrogacion.jpg" alt="Cancion 6">
-            <div class="cancion-texto">
-                <h3>?????</h3>
-                <p>??????????????<br>???????????????</p>
-            </div>
-        </a>
+    <a href="https://www.youtube.com/watch?v=16R5bvunbow" target="_blank" class="cancion">
+      <img src="COMPARTIR.jpg" alt="Cancion 5">
+      <div class="cancion-texto">
+        <h3>Compartir</h3>
+        <p>Amor mio esta cancion te la dedico completa <br> siento cada parte de la cancion quiero todo contigo, Te amo.</p>
+      </div>
+    </a>
+
+    <!-- Canción con contador -->
+    <div class="cancion">
+      <img src="interrogacion.jpg" alt="Cancion 6">
+      <div class="cancion-texto">
+        <h3>?????</h3>
+        <p>Disponible en...</p>
+        <div id="contador" class="contador"></div>
+      </div>
     </div>
+  </div>
 
-    <a href="si.html" class="volver">⬅ Volver</a>
+  <a href="si.html" class="volver">⬅ Volver</a>
+
+  <script>
+    // Fecha objetivo: 20/08 a las 00:00
+    const fechaObjetivo = new Date("Aug 20, 2025 00:00:00").getTime();
+
+    const intervalo = setInterval(() => {
+      const ahora = new Date().getTime();
+      const diferencia = fechaObjetivo - ahora;
+
+      if (diferencia <= 0) {
+        clearInterval(intervalo);
+        document.getElementById("contador").innerHTML = "🎶 ¡Disponible ahora! 🎶";
+        return;
+      }
+
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+      document.getElementById("contador").innerHTML =
+        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    }, 1000);
+  </script>
 </body>
 </html>
