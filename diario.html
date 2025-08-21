@@ -2,129 +2,107 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>🌸 Nuestro Diario Diario 🌸</title>
+  <title>🌸 Diario Secreto 🌸</title>
   <style>
     body {
-      font-family: "Times New Roman", serif;
+      font-family: "Poppins", sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contenedor {
+      max-width: 600px;
+      width: 90%;
+      background: rgba(255,255,255,0.95);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
       text-align: center;
-      background: linear-gradient(to bottom, #fbc2eb, #a6c1ee);
     }
 
     h1 {
       color: #4b0082;
-      margin-bottom: 20px;
-      font-size: 34px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      font-size: 32px;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
 
-    .diario-container {
-      max-width: 700px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.9);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    p.sub {
+      color: #444;
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-style: italic;
     }
 
     textarea {
       width: 100%;
-      height: 80px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      padding: 10px;
+      height: 100px;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+      padding: 12px;
       font-size: 16px;
       resize: none;
-      margin-bottom: 10px;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #a020f0;
+      box-shadow: 0 0 8px rgba(160,32,240,0.5);
     }
 
     button {
-      background-color: #4b0082;
+      margin-top: 15px;
+      background: linear-gradient(135deg, #6a0dad, #b84de4);
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
       font-size: 16px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: transform 0.2s, background 0.3s;
     }
 
     button:hover {
-      background-color: #6a0dad;
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #8a2be2, #d896ff);
     }
 
-    .notas {
+    .mensaje {
       margin-top: 20px;
-      text-align: left;
-    }
-
-    .nota {
-      background: #f8f0ff;
-      border-left: 5px solid #4b0082;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 8px;
-    }
-
-    .nota strong {
-      color: #4b0082;
+      font-size: 18px;
+      color: green;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>🌸 Nuestro Diario de Frases 🌸</h1>
-  <div class="diario-container">
-    <textarea id="frase" placeholder="Escribe aquí tu frase de hoy..."></textarea><br>
-    <button onclick="guardarFrase()">Guardar Frase</button>
+  <div class="contenedor">
+    <h1>🌸 Diario Secreto 🌸</h1>
+    <p class="sub">Escribe solo <strong>una frase al día</strong>. Una vez enviada, se guardará en secreto.</p>
 
-    <div class="notas" id="notas"></div>
+    <!-- Formulario con Netlify Forms -->
+    <form name="diario" method="POST" data-netlify="true" onsubmit="return enviarFrase(event)">
+      <textarea id="frase" name="frase" placeholder="Escribe aquí tu frase de hoy..."></textarea>
+      <br>
+      <button type="submit">💌 Guardar Frase</button>
+    </form>
+
+    <div class="mensaje" id="mensaje">✨ Tu frase se guardó en secreto ✨</div>
   </div>
 
   <script>
-    // Cargar frases guardadas al iniciar
-    let notas = JSON.parse(localStorage.getItem("diario")) || [];
-    mostrarNotas();
-
-    function guardarFrase() {
-      let texto = document.getElementById("frase").value.trim();
-      let hoy = new Date().toLocaleDateString("es-CL");
-      let ultimaNota = notas.length > 0 ? notas[notas.length - 1] : null;
-
-      // Verificar si ya escribió hoy
-      if (ultimaNota && ultimaNota.fecha === hoy) {
-        alert("Ya escribiste tu frase de hoy ❤️");
-        return;
-      }
-
-      if (texto === "") {
-        alert("Por favor escribe una frase antes de guardar.");
-        return;
-      }
-
-      // Crear nueva nota
-      let nuevaNota = {
-        numero: notas.length + 1,
-        fecha: hoy,
-        texto: texto
-      };
-
-      notas.push(nuevaNota);
-      localStorage.setItem("diario", JSON.stringify(notas));
-
-      document.getElementById("frase").value = "";
-      mostrarNotas();
-    }
-
-    function mostrarNotas() {
-      let contenedor = document.getElementById("notas");
-      contenedor.innerHTML = "";
-      notas.forEach(nota => {
-        let div = document.createElement("div");
-        div.className = "nota";
-        div.innerHTML = `<strong>${nota.numero} - ${nota.fecha}:</strong> ${nota.texto}`;
-        contenedor.appendChild(div);
-      });
+    function enviarFrase(event) {
+      event.preventDefault();
+      document.querySelector("form").style.display = "none";
+      document.getElementById("mensaje").style.display = "block";
+      return true;
     }
   </script>
 </body>
