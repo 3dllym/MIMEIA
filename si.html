@@ -2,218 +2,82 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Te amo ❤️</title>
+<title>Lianas románticas 🌿</title>
 <style>
     body {
-        background-color: #fcf0ca;
-        text-align: center;
-        font-family: Arial, sans-serif;
+        background: #fcf0ca;
         margin: 0;
-        padding: 0;
-    }
-    h1 {
-        color: red;
-        margin-top: 30px;
-    }
-    /* Contenedor del carrusel + mensaje */
-    .contenedor {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        margin-top: 20px;
-        flex-wrap: wrap; /* para móviles */
-        position: relative;
-        z-index: 1; /* para que quede sobre las lianas */
-    }
-    .carrusel {
-        position: relative;
-        max-width: 500px;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-    .carrusel img {
-        width: 100%;
-        display: none;
-    }
-    .carrusel img.active {
-        display: block;
-    }
-    .boton {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0,0,0,0.5);
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        border-radius: 50%;
-        font-size: 18px;
-    }
-    .prev { left: 10px; }
-    .next { right: 10px; }
-
-    /* Estilo del mensaje */
-    .mensaje {
-        font-family: "Times New Roman", serif;
-        font-size: 18px;
-        max-width: 300px;
+        font-family: Arial, sans-serif;
         text-align: center;
-        line-height: 1.5;
     }
 
-    /* Contenedor de los botones */
-    .botones {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        z-index: 1;
-        position: relative;
-    }
-    .botones a {
-        text-decoration: none;
-        padding: 15px 25px;
-        background-color: #c2185b;
-        color: white;
-        border-radius: 12px;
-        font-size: 18px;
-        font-weight: bold;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-        transition: transform 0.2s, background-color 0.3s;
-    }
-    .botones a:hover {
-        background-color: #ff4081;
-        transform: scale(1.1);
+    h1 {
+        margin-top: 40px;
+        color: #d32f2f;
     }
 
-    /* Nota musical animada */
-    .musica-btn {
-        position: relative;
-    }
-    .musica-btn .nota {
-        display: inline-block;
-        margin-left: 5px;
-        animation: subirNota 1s infinite alternate;
-        color: yellow;
-        font-weight: bold;
-    }
-    @keyframes subirNota {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
-        100% { transform: translateY(0); }
-    }
-
-    /* ======== Lianas a los costados ======== */
+    /* Lianas con SVG */
     .liana {
         position: fixed;
         top: 0;
-        width: 40px;
         height: 100%;
-        background: linear-gradient(to bottom, #2e7d32, #1b5e20);
-        border-radius: 20px;
-        z-index: 0; /* detrás del contenido */
-        overflow: visible;
+        width: 100px;
+        z-index: -1;
     }
     .liana.izquierda {
-        left: 10px;
+        left: 0;
     }
     .liana.derecha {
-        right: 10px;
+        right: 0;
+        transform: scaleX(-1); /* espejo para el otro lado */
     }
 
-    /* Hojitas en las lianas */
-    .liana::before,
-    .liana::after {
-        content: "🌿";
-        position: absolute;
-        font-size: 24px;
-        animation: balanceo 3s infinite ease-in-out;
-        color: green;
-    }
-    .liana::before {
-        top: 20%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .liana::after {
-        top: 60%;
-        left: 50%;
-        transform: translateX(-50%);
+    /* Animación balanceo */
+    .liana svg {
+        height: 100%;
+        width: 100%;
+        animation: balanceo 5s infinite ease-in-out;
+        transform-origin: top center;
     }
 
-    /* Animación de balanceo */
     @keyframes balanceo {
-        0% { transform: translateX(-50%) rotate(0deg); }
-        50% { transform: translateX(-50%) rotate(10deg); }
-        100% { transform: translateX(-50%) rotate(0deg); }
+        0% { transform: rotate(0deg); }
+        50% { transform: rotate(3deg); }
+        100% { transform: rotate(0deg); }
     }
 </style>
 </head>
 <body>
-    <!-- Lianas -->
-    <div class="liana izquierda"></div>
-    <div class="liana derecha"></div>
+    <!-- Liana izquierda -->
+    <div class="liana izquierda">
+        <svg viewBox="0 0 100 800" preserveAspectRatio="xMidYMin slice">
+            <path d="M50 0 
+                     C30 100, 70 200, 50 300
+                     C30 400, 70 500, 50 600
+                     C30 700, 70 800, 50 900"
+                  stroke="#2e7d32" stroke-width="8" fill="none"/>
+            <!-- Hojitas -->
+            <circle cx="40" cy="150" r="12" fill="#388e3c"/>
+            <circle cx="60" cy="350" r="12" fill="#43a047"/>
+            <circle cx="40" cy="550" r="12" fill="#66bb6a"/>
+        </svg>
+    </div>
+
+    <!-- Liana derecha (espejo) -->
+    <div class="liana derecha">
+        <svg viewBox="0 0 100 800" preserveAspectRatio="xMidYMin slice">
+            <path d="M50 0 
+                     C30 100, 70 200, 50 300
+                     C30 400, 70 500, 50 600
+                     C30 700, 70 800, 50 900"
+                  stroke="#2e7d32" stroke-width="8" fill="none"/>
+            <circle cx="40" cy="150" r="12" fill="#388e3c"/>
+            <circle cx="60" cy="350" r="12" fill="#43a047"/>
+            <circle cx="40" cy="550" r="12" fill="#66bb6a"/>
+        </svg>
+    </div>
 
     <h1>💖 Gracias por amarme 💖</h1>
-    <p>Nuestras fotitosss:</p>
-
-    <div class="contenedor">
-        <!-- Carrusel -->
-        <div class="carrusel">
-            <img src="skincare_mi.jpg" class="active" alt="Foto 1">
-            <img src="desp.jpg" alt="Foto 2">
-            <img src="Maquillaje.jpg" alt="Foto 3">
-            <img src="JAJA.jpg" alt="Foto 4">
-            <img src="Primeravez.jpg" alt="Foto 5">
-            <img src="CumpJ.jpg" alt="Foto 6">
-
-            <button class="boton prev" onclick="cambiarFoto(-1)">❮</button>
-            <button class="boton next" onclick="cambiarFoto(1)">❯</button>
-        </div>
-
-        <!-- Mensaje a la derecha -->
-        <p class="mensaje">
-            Tu eres la persona que necesitaba en mi vida, una persona que nunca me arrepentiré de conocer que 
-            me ha enseñado muchas cosas y quiero que me enseñe muchas más.  
-            Eres mi primer amor y quiero que seas el último.  
-            No dejo de pensar en qué será de nosotros, pero lo único que me importa es seguir a tu lado.  
-            Y el amor que te doy esperando que sea suficiente, es lo más sincero que te puedo dar.  
-            Pienso que no te merezco, pero me esfuerzo cada día para merecerte. Eres mi todo y que nunca se te olvide lo que siento por ti
-            así como yo jamás dejaré de sentirlo. Quiero seguir teniendo experiencias contigo quiero seguir riendo, feliz, triste y hasta llorar pero contigo,
-            que sepas que siempre voy a estar ahí para ti. Te amo 💖
-        </p>
-    </div>
-
-    <!-- Botones debajo del carrusel -->
-    <div class="botones">
-        <a href="index.html">⬅ Volver</a>
-        <a href="canciones.html" class="musica-btn">🎵 Nuestras Canciones <span class="nota">♪</span></a>
-        <a href="cartas.html">💌 Cartas</a>
-        <a href="calendario.html">📅 Calendario</a>
-    </div>
-
-    <script>
-        let indice = 0;
-        const fotos = document.querySelectorAll(".carrusel img");
-
-        function mostrarFoto(n) {
-            fotos.forEach(f => f.classList.remove("active"));
-            indice = (n + fotos.length) % fotos.length;
-            fotos[indice].classList.add("active");
-        }
-
-        function cambiarFoto(n) {
-            mostrarFoto(indice + n);
-        }
-
-        // Carrusel automático cada 5 segundos
-        setInterval(() => {
-            cambiarFoto(1);
-        }, 5000);
-    </script>
+    <p>Tu contenido romántico va al centro 🌹</p>
 </body>
 </html>
