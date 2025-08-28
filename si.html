@@ -12,10 +12,10 @@
     }
     h1 {
         color: red;
-        margin-top: 120px; /* espacio para que la navbar no tape el título */
+        margin-top: 90px; /* espacio para la navbar fija */
     }
 
-    /* 🌸 NAVBAR ESTILOS 🌸 */
+    /* 🔹 NAVBAR */
     nav {
         background: linear-gradient(270deg, #ff6f91, #ff9a9e, #ffb6c1);
         background-size: 600% 600%;
@@ -23,7 +23,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px 30px;
+        padding: 15px 25px;
         position: fixed;
         top: 0;
         width: 100%;
@@ -32,23 +32,15 @@
     }
 
     @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .logo {
-        display: flex;
-        align-items: center;
         color: white;
         font-size: 20px;
         font-weight: bold;
-        gap: 10px;
-    }
-    .logo img {
-        height: 40px;
-        border-radius: 50%;
-        border: 2px solid white;
     }
 
     ul {
@@ -62,10 +54,9 @@
     ul li a {
         text-decoration: none;
         color: white;
-        font-size: 16px;
         font-weight: bold;
+        font-size: 16px;
         transition: transform 0.3s, text-shadow 0.3s;
-        position: relative;
     }
 
     ul li a:hover {
@@ -73,64 +64,52 @@
         text-shadow: 0 0 10px #fff, 0 0 20px #ffbad2;
     }
 
-    /* ❤️ Corazón en hover */
-    ul li a::after {
-        content: "❤";
-        position: absolute;
-        top: -18px;
-        right: -15px;
-        font-size: 14px;
-        opacity: 0;
-        transition: 0.3s;
-        color: #fff;
-    }
-    ul li a:hover::after {
-        opacity: 1;
-    }
-
-    /* 🌸 Responsive - menú hamburguesa */
+    /* 🔹 BOTÓN HAMBURGUESA */
     .menu-toggle {
         display: none;
         flex-direction: column;
         cursor: pointer;
-        gap: 5px;
     }
-    .menu-toggle span {
+
+    .menu-toggle div {
         width: 25px;
         height: 3px;
         background: white;
+        margin: 4px 0;
         border-radius: 5px;
     }
 
     @media (max-width: 768px) {
         ul {
-            display: none;
-            flex-direction: column;
-            background: rgba(255, 182, 193, 0.95);
             position: absolute;
             top: 60px;
-            right: 10px;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            right: 0;
+            background: #ff6f91;
+            flex-direction: column;
+            width: 200px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+            border-radius: 0 0 0 15px;
         }
-        ul.active {
-            display: flex;
+
+        ul.show {
+            max-height: 400px;
         }
+
         .menu-toggle {
             display: flex;
         }
     }
 
-    /* 🌸 CONTENIDO */
+    /* 🔹 CONTENEDOR PRINCIPAL */
     .contenedor {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 40px;
         margin-top: 20px;
-        flex-wrap: wrap; /* para móviles */
-        padding: 20px;
+        flex-wrap: wrap;
     }
     .carrusel {
         position: relative;
@@ -161,6 +140,7 @@
     .prev { left: 10px; }
     .next { right: 10px; }
 
+    /* Estilo del mensaje */
     .mensaje {
         font-family: "Times New Roman", serif;
         font-size: 18px;
@@ -168,45 +148,28 @@
         text-align: center;
         line-height: 1.5;
     }
-
-    /* Notas musicales */
-    .musica-btn .nota {
-        display: inline-block;
-        margin-left: 5px;
-        animation: subirNota 1s infinite alternate;
-        color: yellow;
-        font-weight: bold;
-    }
-    @keyframes subirNota {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
-        100% { transform: translateY(0); }
-    }
 </style>
 </head>
 <body>
-    <!-- 🌸 NAVBAR -->
+    <!-- 🔹 NAVBAR -->
     <nav>
-        <div class="logo">
-            <img src="tu-logo.png" alt="Logo">
-            <span>Para mi amor 💖</span>
+        <div class="logo">💖 Para mi amor</div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
         </div>
-        <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('active')">
-            <span></span><span></span><span></span>
-        </div>
-        <ul>
-            <li><a href="index.html">⬅ Volver</a></li>
+        <ul id="menu">
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="canciones.html">🎵 Canciones</a></li>
             <li><a href="cartas.html">💌 Cartas</a></li>
             <li><a href="calendario.html">📅 Calendario</a></li>
         </ul>
     </nav>
 
-    <!-- 🌸 CONTENIDO PRINCIPAL -->
     <h1>💖 Gracias por amarme 💖</h1>
     <p>Nuestras fotitosss:</p>
 
     <div class="contenedor">
+        <!-- Carrusel -->
         <div class="carrusel">
             <img src="skincare_mi.jpg" class="active" alt="Foto 1">
             <img src="desp.jpg" alt="Foto 2">
@@ -219,6 +182,7 @@
             <button class="boton next" onclick="cambiarFoto(1)">❯</button>
         </div>
 
+        <!-- Mensaje a la derecha -->
         <p class="mensaje">
             Tu eres la persona que necesitaba en mi vida, una persona que nunca me arrepentiré de conocer que 
             me ha enseñado muchas cosas y quiero que me enseñe muchas más.  
@@ -232,6 +196,7 @@
     </div>
 
     <script>
+        // Carrusel
         let indice = 0;
         const fotos = document.querySelectorAll(".carrusel img");
 
@@ -248,6 +213,11 @@
         setInterval(() => {
             cambiarFoto(1);
         }, 5000);
+
+        // Menú hamburguesa
+        function toggleMenu() {
+            document.getElementById("menu").classList.toggle("show");
+        }
     </script>
 </body>
 </html>
